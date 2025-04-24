@@ -1,44 +1,47 @@
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  mode: "development",
+  mode: 'development',
   entry: {
-    index: "./src/main.js",
-    style: "./src/assets/styles.css",
+    index: './src/main.js',
+    style: './src/assets/styles.css',
+
   },
-  devtool: "inline-source-map",
+  devtool: 'inline-source-map',
   devServer: {
-    static: "./dist",
+    static: './dist',
     hot: true,
     liveReload: true,
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "./index.html",
+      template: './src/index.html',
     }),
   ],
   output: {
-    filename: "[name].bundle.js",
-    path: path.resolve(__dirname, "dist"),
+    filename: '[name].bundle.js',
+    path: path.resolve(__dirname, 'dist'),
     clean: true,
   },
   module: {
     rules: [
       {
         test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
+        use: ['style-loader', 'css-loader'],
+
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
-        type: "asset/resource",
+        type: 'asset/resource',
         generator: {
-          filename: "assets/images/[name][ext]",
+          filename: 'assets/images/[name][ext]',
         },
       },
+
     ],
   },
   optimization: {
-    runtimeChunk: "single",
+    runtimeChunk: 'single',
   },
 };
