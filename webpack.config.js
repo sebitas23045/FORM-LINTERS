@@ -2,9 +2,9 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: './src/main.js', // ← correcto!
+  entry: './src/js/main.js',
   output: {
-    filename: '[name].bundle.js', // index.bundle.js
+    filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
     clean: true,
   },
@@ -16,7 +16,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/index.html', // correcto
+      template: './src/index.html',
     }),
   ],
   module: {
@@ -29,7 +29,7 @@ module.exports = {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
         type: 'asset/resource',
         generator: {
-          filename: 'assets/images/[name][ext]', // perfecto
+          filename: 'assets/images/[name][ext]',
         },
       },
     ],
