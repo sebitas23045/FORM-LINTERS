@@ -14,7 +14,7 @@ body::before {
   z-index: -1;
   background-image:
     linear-gradient(115deg, rgba(54, 178, 235, 0.5), rgba(9, 86, 228, 0.5)),
-    url(./crab-9179589_1280.jpg);
+    url(./images/crab-9179589_1280.jpg);
   background-repeat: no-repeat;
   background-position: center;
 }
