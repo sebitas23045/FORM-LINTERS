@@ -1,45 +1,41 @@
-{
-    "name": "formulario",
-    "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
-    "scripts": {
-        "test": "echo \"No tests yet\"",
-        "start": "node server.js",
-        "build": "webpack --mode=production",
-        "lint:stylelint": "stylelint \"**/*.css\""
-    },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
-    "devDependencies": {
-        "babel-eslint": "^10.1.0",
-        "css-loader": "^7.1.2",
-        "eslint": "^7.32.0",
-        "eslint-config-airbnb-base": "^14.2.1",
-        "eslint-plugin-import": "^2.31.0",
-        "hint": "^7.1.13",
-        "html-loader": "^5.1.0",
-        "html-webpack-plugin": "^5.6.3",
-        "style-loader": "^4.0.0",
-        "stylelint": "^13.13.1",
-        "stylelint-config-standard": "^21.0.0",
-        "stylelint-csstree-validator": "^1.9.0",
-        "stylelint-scss": "^3.21.0",
-        "webpack": "^5.98.0",
-        "webpack-cli": "^6.0.1",
-        "webpack-dev-server": "^5.2.0"
-    },
-    "dependencies": {
-        "express": "^4.21.2",
-        "formulario": "file:"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/sebitas23045/FORM-LINTERS.git"
-    },
-    "bugs": {
-        "url": "https://github.com/sebitas23045/FORM-LINTERS.git"
-    },
-    "homepage": "https://github.com/sebitas23045/FORM-LINTERS.git"
-}
+name: Build, Lint and Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-lint-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Stylelint
+        run: npm run lint:stylelint
+
+      - name: Run ESLint
+        run: npm run lint:eslint
+
+      - name: Run HTMLHint
+        run: npm run lint:htmlhint
+
+      - name: Build project
+        run: npm run build
+
+      - name: Deploy to Azure Web App
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{ secrets.AZURE_WEBAPP_NAME }}
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          package: ./dist
