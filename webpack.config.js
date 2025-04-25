@@ -5,8 +5,6 @@ module.exports = {
   mode: 'development',
   entry: {
     index: './src/main.js',
-    style: './src/assets/styles.css',
-
   },
   devtool: 'inline-source-map',
   devServer: {
@@ -29,7 +27,6 @@ module.exports = {
       {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
-
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
@@ -38,7 +35,6 @@ module.exports = {
           filename: 'assets/images/[name][ext]',
         },
       },
-
     ],
   },
   optimization: {
